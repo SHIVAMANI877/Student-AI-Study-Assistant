@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}   
+
+body {
+    background: linear-gradient(135deg, #98cddc, #9ae09a);
+    color: #0e0d0d;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(248, 248, 246, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #464946;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 16px;
+}
+footer  {
+    color: #0c0c0c;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+button {
+    align-self: flex-end;
+    padding: 12px 30px;
+    background: #a6c65f;
+    color: rgb(66, 64, 64);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2bc64c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.answer-section {
+    margin-top: 20px;
+}
+
+.answer-card {
+    background: hsl(0, 0%, 5%);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.846);
+}
+
+.answer-content {
+    margin-top: 15px;
+    line-height: 1.6;
+    color: hsl(0, 19%, 92%);
+}
+
+.loading {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1e3c72;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error {
+    color: #dc3545;
+    padding: 10px;
+    background: #ffe6e6;
+    border-radius: 5px;
+    margin-top: 10px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Study Assistant 🤖📚</h1>
+        <div class="chat-container">
+            <div class="input-section">
+                <textarea id="question-input" placeholder="Ask your study question... (Press Shift+Enter for new line)"></textarea>
+                <button onclick="askQuestion()">Get Answer</button>
+            </div>
+            <div id="result" class="answer-section">
+                <!-- Answers will be displayed here -->
+            </div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add Enter key support
+        document.getElementById('question-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                askQuestion();
+            }
+        });
+
+        async function askQuestion() {
+            const questionInput = document.getElementById('question-input');
+            const question = questionInput.value.trim();
+            const resultDiv = document.getElementById('result');
+            const loading = document.getElementById('loading');
+
+            if (!question) return;
+
+            // Clear input and previous results
+            questionInput.value = '';
+            resultDiv.innerHTML = '';
+            loading.style.display = 'flex';
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    resultDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="answer-card">
+                            <h3>📖 Answer:</h3>
+                            <div class="answer-content">${data.answer.replace(/\n/g, '<br>')}</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Connection error: ${error.message}</p>`;
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+    <footer><b>POWERED BY ACET</b></footer>
+</body>
+</html>
